@@ -17,9 +17,13 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100%;
   overflow: hidden;
   background: #070809;
   color: var(--text);
@@ -28,12 +32,14 @@ body {
 
 button {
   font: inherit;
+  overflow-wrap: anywhere;
 }
 
 .game-shell,
 .start-screen,
 .stage-screen {
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .start-screen,
@@ -395,6 +401,7 @@ button:disabled {
 .verdict {
   color: var(--muted);
   line-height: 1.64;
+  overflow-wrap: anywhere;
 }
 
 .card-actions {
@@ -533,12 +540,215 @@ button:disabled {
 
 @media (max-width: 860px) {
   body {
-    overflow: auto;
+    overflow: hidden;
   }
 
-  .topbar,
-  .top-actions,
-  .action-list,
+  .start-screen {
+    align-items: end;
+    padding: 22px 18px max(34px, env(safe-area-inset-bottom));
+    background:
+      linear-gradient(0deg, rgba(4, 6, 7, 0.96) 0%, rgba(4, 6, 7, 0.72) 48%, rgba(4, 6, 7, 0.18) 100%),
+      url("assets/02_初始场景_死者伏倒桌上.png") 61% center / cover;
+  }
+
+  .start-copy {
+    width: 100%;
+  }
+
+  .start-copy h1 {
+    margin-bottom: 16px;
+    font-size: clamp(48px, 17vw, 66px);
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  .start-copy p:last-of-type {
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .primary-btn {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  .stage-screen {
+    overflow: hidden;
+  }
+
+  .stage-image {
+    object-position: 62% center;
+  }
+
+  .stage-shade {
+    background:
+      linear-gradient(180deg, rgba(5, 7, 8, 0.94) 0%, rgba(5, 7, 8, 0.48) 35%, rgba(5, 7, 8, 0.94) 100%),
+      radial-gradient(circle at 70% 42%, rgba(123, 201, 192, 0.09), transparent 28%);
+  }
+
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 10px;
+    width: calc(100vw - 28px);
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+
+  .topbar h1 {
+    font-size: clamp(22px, 7vw, 30px);
+    line-height: 1.18;
+  }
+
+  .kicker,
+  .chapter-label {
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .top-actions {
+    display: flex;
+    justify-content: end;
+  }
+
+  .top-actions .ghost-btn {
+    min-width: 76px;
+    min-height: 36px;
+    padding: 0 9px;
+    font-size: 12px;
+  }
+
+  .progress-strip {
+    display: flex;
+    width: calc(100vw - 28px);
+    margin-top: 10px;
+    gap: 7px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .progress-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .progress-node {
+    flex: 0 0 118px;
+    min-height: 44px;
+    padding: 7px 8px;
+    scroll-snap-align: start;
+  }
+
+  .progress-node strong {
+    font-size: 12px;
+  }
+
+  .progress-node span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .story-panel {
+    left: 14px;
+    right: 14px;
+    bottom: calc(78px + env(safe-area-inset-bottom));
+    width: auto;
+    max-height: min(54vh, 430px);
+    overflow-y: auto;
+    padding: 14px;
+    border: 1px solid rgba(234, 220, 204, 0.16);
+    background: rgba(11, 12, 13, 0.72);
+    backdrop-filter: blur(12px);
+  }
+
+  .story-text {
+    min-height: auto;
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .story-text p {
+    margin-bottom: 9px;
+  }
+
+  .chapter-nav,
+  .action-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chapter-nav .ghost-btn,
+  .action-list button {
+    min-width: 0;
+  }
+
+  .action-list {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .action-list button {
+    min-height: 46px;
+    padding: 9px 10px;
+    font-size: 14px;
+  }
+
+  .dock {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    width: auto;
+    transform: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    padding: 7px;
+  }
+
+  .dock button {
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 6px;
+    font-size: 14px;
+  }
+
+  .panel-overlay {
+    align-items: end;
+    place-items: end stretch;
+    padding: 0;
+    background: rgba(4, 5, 6, 0.72);
+  }
+
+  .panel-window {
+    width: 100vw;
+    max-height: 91dvh;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+  }
+
+  .panel-head {
+    align-items: center;
+    padding: 14px 14px 10px;
+  }
+
+  .panel-head h2 {
+    font-size: 24px;
+  }
+
+  .panel-head .ghost-btn {
+    min-width: 68px;
+    min-height: 38px;
+  }
+
+  .panel-body {
+    padding: 12px 14px calc(18px + env(safe-area-inset-bottom));
+  }
+
   .grid,
   .person-focus,
   .choice-grid {
@@ -546,19 +756,71 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 
-  .progress-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .card {
+    min-height: 0;
+  }
+
+  .card img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .card-content,
+  .deduction-step,
+  .verdict {
+    padding: 11px;
+  }
+
+  .card h3,
+  .deduction-step h3 {
+    font-size: 17px;
+  }
+
+  .card p,
+  .deduction-step p,
+  .verdict {
+    font-size: 14px;
+  }
+
+  .card-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .choice-btn {
+    min-height: 44px;
+    padding: 9px 10px;
+    font-size: 14px;
+  }
+
+  .transition {
+    padding: 22px;
+  }
+
+  .transition span {
+    font-size: clamp(52px, 20vw, 86px);
+  }
+
+  .transition p {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+}
+
+@media (max-width: 380px) {
+  .topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .top-actions {
+    justify-content: start;
   }
 
   .story-panel {
-    left: 18px;
-    bottom: 118px;
-    width: calc(100vw - 36px);
+    max-height: 50vh;
   }
 
-  .dock {
-    width: calc(100vw - 20px);
-    overflow-x: auto;
-    justify-content: start;
+  .chapter-nav,
+  .action-list {
+    grid-template-columns: 1fr;
   }
 }
