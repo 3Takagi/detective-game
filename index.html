@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>密室毒杀案</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="start-screen" id="startScreen">
+        <div class="start-copy">
+          <p class="kicker">恒远写字楼 18 层 · 研发部总监办公室</p>
+          <h1>密室毒杀案</h1>
+          <p>
+            下班高峰已经过去，写字楼的灯一层层熄灭。21:35，研发部总监陈峰被发现伏倒在办公桌上。
+            门从内侧反锁，窗户封闭，没有撬动痕迹。桌上还剩半杯咖啡。
+          </p>
+          <button class="primary-btn" id="startGame" type="button">进入现场</button>
+        </div>
+      </section>
+
+      <section class="stage-screen" id="stageScreen" aria-label="当前剧情">
+        <img id="stageImage" class="stage-image" src="assets/02_初始场景_死者伏倒桌上.png" alt="案发现场" />
+        <div class="stage-shade"></div>
+
+        <header class="topbar">
+          <div>
+            <p class="kicker" id="stageKicker">案前回溯</p>
+            <h1 id="stageTitle">20:30 · 灯还没全灭</h1>
+          </div>
+          <div class="top-actions">
+            <button class="ghost-btn" id="audioToggle" type="button">环境声：关</button>
+          </div>
+        </header>
+
+        <div class="progress-strip" id="progressStrip"></div>
+
+        <section class="story-panel">
+          <p class="chapter-label" id="chapterLabel">序章</p>
+          <div id="storyText" class="story-text" aria-live="polite"></div>
+          <div class="chapter-nav">
+            <button class="ghost-btn" id="prevChapter" type="button">上一幕</button>
+            <button class="ghost-btn" id="nextChapter" type="button">下一幕</button>
+          </div>
+          <div id="actionList" class="action-list"></div>
+        </section>
+
+        <nav class="dock" aria-label="调查功能">
+          <button data-panel="case" type="button">案卷</button>
+          <button data-panel="evidence" type="button">证据</button>
+          <button data-panel="people" type="button">人物</button>
+          <button data-panel="deduction" type="button">结案</button>
+        </nav>
+      </section>
+
+      <section class="panel-overlay" id="panelOverlay" aria-hidden="true">
+        <div class="panel-window">
+          <header class="panel-head">
+            <div>
+              <p class="kicker" id="panelKicker">调查资料</p>
+              <h2 id="panelTitle">案卷</h2>
+            </div>
+            <button class="ghost-btn" id="closePanel" type="button">关闭</button>
+          </header>
+          <div class="panel-body" id="panelBody"></div>
+        </div>
+      </section>
+
+      <section class="transition" id="transitionOverlay" aria-hidden="true">
+        <span id="transitionTime">21:10</span>
+        <p id="transitionText">电梯门打开，18 层走廊的灯闪了一下。</p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
